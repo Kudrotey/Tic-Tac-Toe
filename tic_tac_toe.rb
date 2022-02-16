@@ -12,33 +12,29 @@ class UserName
 
 end
 
-
 class TicTacToe 
 
-    attr_accessor :score_board, :display_board
+    attr_accessor :score_board
     def initialize
-        @score_board = ['', '', '',
-        '', '', '',
-        '', '', '']
-
-    
+        @score_board = [' ', ' ', ' ',
+        ' ', ' ', ' ',
+        ' ', ' ', ' ']
     end
+
 
     def display_board
-        row =  ["   " "|" "   " "|" "   "]
-        separator = "-----------"
-
-        puts row
-        puts separator
-        puts row
-        puts separator
-        puts row        
-    end
-
+        puts " #{@score_board[0]} | #{@score_board[1]} | #{@score_board[2]} "
+        puts "-----------"
+        puts " #{@score_board[3]} | #{@score_board[4]} | #{@score_board[5]} "
+        puts "-----------"
+        puts " #{@score_board[6]} | #{@score_board[7]} | #{@score_board[8]} "
+     end
     
-
+     
   end
 
+
+  
 
 
 

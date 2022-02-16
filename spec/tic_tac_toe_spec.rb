@@ -22,17 +22,16 @@ describe TicTacToe do
         it 'Can return an array with 9 empty strings' do
             tic_tac_toe = described_class.new
         
-            expect(tic_tac_toe.score_board).to eq (['', '', '',
-        '', '', '',
-        '', '', ''])
+            expect(tic_tac_toe.score_board).to eq ([' ', ' ', ' ',
+        ' ', ' ', ' ',
+        ' ', ' ', ' '])
         end
     end
     describe 'display_board' do
         it 'Can display a 3 x 3 grid in the terminal' do
             tic_tac_toe = described_class.new
-            row = "   " "|" "   " "|" "   \n"
-            separator = "----------- \n"
-            expect{tic_tac_toe.display_board}.to output("   " "|" "   " "|" "   \n" "-----------\n" "   " "|" "   " "|" "   \n" "-----------\n" "   " "|" "   " "|" "   \n").to_stdout
+            score_board = tic_tac_toe.score_board
+            expect{tic_tac_toe.display_board}.to output(" #{score_board[0]} " "|" " #{score_board[1]} " "|" " #{score_board[2]} \n" "-----------\n" " #{score_board[3]} " "|" " #{score_board[4]} " "|" " #{score_board[5]} \n" "-----------\n" " #{score_board[6]} " "|" " #{score_board[7]} " "|" " #{score_board[8]} \n").to_stdout
         end
     
     end
