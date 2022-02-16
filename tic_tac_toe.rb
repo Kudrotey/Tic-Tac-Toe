@@ -4,6 +4,12 @@ class UserName
         @name = 'Not defined'
     end
 
+    def change_user_name(username_instance)
+        puts "Name: "
+        username_instance.name = gets.chomp
+        # puts "You are playing as #{username_instance.name }"
+    end
+
 end
 
 
@@ -25,22 +31,10 @@ class TicTacToe
         puts row        
     end
 
-    def change_user_name(username_instance)
-        # puts username_instance.name
-        puts "Name: "
-        username_instance.name = gets.chomp
-        # puts "You are playing as #{username_instance.name }"
-    end
+    
 
   end
-#   user = UserName.new
-#   game = TicTacToe.new
-#   puts game.change_user_name(user)
 
-
-
-# example =  TicTacToe.new
-# puts example.change_user_name(UserName.new())
 
 
 
