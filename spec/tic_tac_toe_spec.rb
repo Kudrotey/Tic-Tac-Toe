@@ -1,6 +1,13 @@
 require_relative '../tic_tac_toe.rb'
 require 'stringio'
 
+# describe UserName do
+#     it 'username initialises as "Not defined"' do
+#         user_name = described_class.new
+#         expect(user_name).to eq(<UserName:0x00007f84720f9cd8 @name="Not defined")
+#     end
+# end
+
 describe TicTacToe do
     describe 'score_board' do 
         it 'Can return an array with 9 empty strings' do
@@ -25,7 +32,7 @@ describe TicTacToe do
     describe 'Update user' do
         it 'Can receive user input and change user name' do
             $stdin = StringIO.new('Lee')
-            user_name = UserName.new('Not defined')
+            user_name = UserName.new
             tic_tac_toe = described_class.new
             
             expect{tic_tac_toe.change_user_name(user_name)}. to output("Name: \n").to_stdout.and change {user_name.name}.to('Lee')

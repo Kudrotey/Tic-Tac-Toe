@@ -1,11 +1,10 @@
 class UserName
     attr_accessor :name
-    def initialize (name = 'Not defined')
-        @name = name
+    def initialize
+        @name = 'Not defined'
     end
+
 end
-
-
 
 
 class TicTacToe 
@@ -27,18 +26,21 @@ class TicTacToe
     end
 
     def change_user_name(username_instance)
-        puts username_instance.name
+        # puts username_instance.name
         puts "Name: "
         username_instance.name = gets.chomp
-        puts "You are playing as #{username_instance.name }"
+        # puts "You are playing as #{username_instance.name }"
     end
 
   end
+#   user = UserName.new
+#   game = TicTacToe.new
+#   puts game.change_user_name(user)
 
 
 
-example =  TicTacToe.new
-puts example.change_user_name(UserName.new())
+# example =  TicTacToe.new
+# puts example.change_user_name(UserName.new())
 
 
 
