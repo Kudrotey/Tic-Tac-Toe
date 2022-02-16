@@ -6,7 +6,7 @@ class UserName
 
     def change_user_name(username_instance)
         puts "Name: "
-        username_instance.name = gets.chomp
+        username_instance.name = gets
         # puts "You are playing as #{username_instance.name }"
     end
 
@@ -30,8 +30,31 @@ class TicTacToe
         puts " #{@score_board[6]} | #{@score_board[7]} | #{@score_board[8]} "
      end
     
+    
+
+     def get_user_input(username_instance)
+        puts "#{username_instance.name}: Make your move"
+        user_input = gets
+        return user_input
+        
+     end
+
+    #  def input_to_index(user_input)
+
+    #  end
+
+    #  def update_score_board
+    #  end
      
   end
+
+# Prompt user to make a move
+# Test: expect tic_tac_to to output ('name: make a move') to stdout
+
+# Take user input
+
+# Push user input into the array
+# Display the display board with user's input
 
 
   

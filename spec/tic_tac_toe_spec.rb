@@ -35,6 +35,33 @@ describe TicTacToe do
         end
     
     end
+    describe 'get_user_input' do 
+        it 'Prompts the user to select there move' do
+            tic_tac_toe = described_class.new
+            user_name = UserName.new
+        
+            expect{tic_tac_toe.get_user_input(user_name)}.to output("#{user_name.name}: Make your move\n").to_stdout
+        end
+        it 'Returns user input' do
+            tic_tac_toe = described_class.new
+            user_name = UserName.new
+            $stdin = StringIO.new('1')
+
+            expect(tic_tac_toe.get_user_input(user_name)).to eq ('1')
+        end
+    
+    
+
+
+
+        # it 'Updates score board with user input' do
+        #     tic_tac_toe = described_class.new
+        #     user_name = UserName.new
+        #     $stdin = StringIO.new('1')
+
+        #     expect{}. to output("#{user_name.name}: Make your move\n").to_stdout.and change {user_name.name}.to('Lee')
+        # end
+    end
     
 
 
