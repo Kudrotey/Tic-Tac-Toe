@@ -12,7 +12,7 @@ describe UserName do
             $stdin = StringIO.new('Lee')
             user_name = UserName.new
             
-            expect{user_name.change_user_name(user_name)}. to output("Name: \n").to_stdout.and change {user_name.name}.to('Lee').
+            expect{user_name.change_user_name(user_name)}. to output("Name: \n").to_stdout.and change {user_name.name}.to('Lee')
         end
     end
 end

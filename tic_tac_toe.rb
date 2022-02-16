@@ -14,10 +14,14 @@ end
 
 
 class TicTacToe 
-    def score_board
-    score_array = ['', '', '',
-    '', '', '',
-    '', '', '']
+
+    attr_accessor :score_board, :display_board
+    def initialize
+        @score_board = ['', '', '',
+        '', '', '',
+        '', '', '']
+
+    
     end
 
     def display_board
