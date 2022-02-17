@@ -49,10 +49,19 @@ describe TicTacToe do
 
             expect(tic_tac_toe.get_user_input(user_name)).to eq ('1')
         end
-    
-    
+    end    
 
+        
+    describe 'input_to_index' do
+        it 'converts user input string to integer' do
+                tic_tac_toe = described_class.new
+                # $stdin = StringIO.new('1')
+                expect(tic_tac_toe.input_to_index('1')). to eq(0)
+        end
+        
+    end
 
+end
 
         # it 'Updates score board with user input' do
         #     tic_tac_toe = described_class.new
@@ -61,25 +70,20 @@ describe TicTacToe do
 
         #     expect{}. to output("#{user_name.name}: Make your move\n").to_stdout.and change {user_name.name}.to('Lee')
         # end
-    end
-    
 
 
-    
-    
 
+  # Can return an array of 9 empty strings
+  # Can display empty grid to the terminal
 
-    # it '' do
-    #     tic_tac_toe = described_class.new
-        
-    #     expect()
-    # end
+  # Can take user input an populate one string in the array
+  # Display updated grid with player 1's input
 
- 
-end
-
-# Can return an array of 9 empty strings
-# Can display empty grid to the terminal
-
-# Can take user input an populate one string in the array
-# Display updated grid with player 1's input
+  # describe 'update_score' do 
+        #     # it 'Updates score board array with user input' do
+        #     #     tic_tac_toe = described_class.new
+        #     #     user_name = UserName.new
+        #     #     $stdin = StringIO.new('1')
+        #     #     expect(tic_tac_toe.score_board[0]). to eq('X')
+        #     # end
+        # end

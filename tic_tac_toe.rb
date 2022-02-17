@@ -39,9 +39,9 @@ class TicTacToe
         
      end
 
-    #  def input_to_index(user_input)
-
-    #  end
+     def input_to_index(user_input)
+        user_input.to_i - 1
+     end
 
     #  def update_score_board
     #  end
@@ -55,6 +55,8 @@ class TicTacToe
 
 # Push user input into the array
 # Display the display board with user's input
+
+# 
 
 
   
