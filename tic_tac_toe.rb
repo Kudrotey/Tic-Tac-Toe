@@ -52,6 +52,10 @@ class TicTacToe
         return 0
      end
 
+     def Test2
+        return 2
+     end
+
     #  def update_score_board
     #  end
      
