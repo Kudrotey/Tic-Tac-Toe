@@ -46,6 +46,8 @@ class TicTacToe
      def update_score_board (index)
         @score_board[index] = 'X'
         @score_board
+
+        
     
      end
 
@@ -54,10 +56,11 @@ class TicTacToe
      
   end
 
-  game = TicTacToe.new
-  user = UserName.new
+  
 
 #   Game script
+game = TicTacToe.new
+  user = UserName.new
   user.change_user_name(user)
   puts game.display_board
   user_input = game.get_user_input(user)
@@ -69,7 +72,6 @@ class TicTacToe
 # Test: expect tic_tac_to to output ('name: make a move') to stdout
 
 # Take user input
-
 # Push user input into the array
 # Display the display board with user's input
 
