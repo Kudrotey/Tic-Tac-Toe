@@ -46,9 +46,10 @@ class TicTacToe
      def update_score_board (index)
         @score_board[index] = 'X'
         @score_board
+     end
 
-        
-    
+     def Test
+        return 0
      end
 
     #  def update_score_board
