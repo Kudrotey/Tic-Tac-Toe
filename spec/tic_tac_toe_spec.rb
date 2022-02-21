@@ -1,4 +1,6 @@
 require_relative '../tic_tac_toe.rb'
+require_relative '../GameSetup/user.rb'
+require_relative '../UI/display.rb'
 require 'stringio'
 
 describe UserName do
@@ -17,26 +19,35 @@ describe UserName do
     end
 end
 
-describe TicTacToe do
-    describe 'score_board' do 
-        it 'Can return an array with 9 empty strings' do
-            tic_tac_toe = described_class.new
-        
-            expect(tic_tac_toe.score_board).to eq ([' ', ' ', ' ',
-        ' ', ' ', ' ',
-        ' ', ' ', ' '])
-        end
-    end
+describe Display do
     describe 'display_board' do
         it 'Can display a 3 x 3 grid in the terminal' do
             tic_tac_toe = described_class.new
             score_board = tic_tac_toe.score_board
             expect{tic_tac_toe.display_board}.to output(" #{score_board[0]} " "|" " #{score_board[1]} " "|" " #{score_board[2]} \n" "-----------\n" " #{score_board[3]} " "|" " #{score_board[4]} " "|" " #{score_board[5]} \n" "-----------\n" " #{score_board[6]} " "|" " #{score_board[7]} " "|" " #{score_board[8]} \n").to_stdout
         end
-    
-    end
+        describe 'score_board' do 
+            it 'Can return an array with 9 empty strings' do
+                tic_tac_toe = described_class.new
+            
+                expect(tic_tac_toe.score_board).to eq ([' ', ' ', ' ',
+            ' ', ' ', ' ',
+            ' ', ' ', ' '])
+            end
+        end
+        describe 'update_score' do
+            it 'Updates the score array with chosen index' do
+                tic_tac_toe = described_class.new
+                expect(tic_tac_toe.update_score_board(0)). to eq(['X', ' ', ' ',
+                ' ', ' ', ' ',
+                ' ', ' ', ' '])
+            end
+        end
+end
+
+describe TicTacToe do
     describe 'get_user_input' do 
-        it 'Prompts the user to select there move' do
+        it 'Prompts the user to select their move' do
             tic_tac_toe = described_class.new
             user_name = UserName.new
         
@@ -60,15 +71,12 @@ describe TicTacToe do
         end
         
     end
-
-    describe 'update_score' do
-        it 'Updates the score array with chosen index' do
-            tic_tac_toe = described_class.new
-            expect(tic_tac_toe.update_score_board(0)). to eq(['X', ' ', ' ',
-            ' ', ' ', ' ',
-            ' ', ' ', ' '])
-        end
+    
+    
     end
+    
+
+    
 
 end
 
