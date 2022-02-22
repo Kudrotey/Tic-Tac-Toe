@@ -4,7 +4,7 @@ require './GameSetup/user.rb'
 class TicTacToe 
 
      def get_user_input(username_instance)
-        puts "#{username_instance.name}: Make your move"
+        puts "#{username_instance.current_player}: Make your move"
         user_input = gets
         return user_input
         

@@ -17,4 +17,6 @@ class Display
         @score_board[index] = 'X'
         @score_board
      end
+
+    #  Maybe change update_score_board to make_move
 end

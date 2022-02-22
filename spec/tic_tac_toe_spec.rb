@@ -1,22 +1,23 @@
 require_relative '../tic_tac_toe.rb'
 require_relative '../GameSetup/user.rb'
+require_relative '../GameSetup/game.rb'
 require_relative '../UI/display.rb'
 require 'stringio'
 
 describe UserName do
-    it 'username initialises as "Not defined"' do
+    it "initialises array of 'X' and 'O'" do
         user_name = described_class.new
-        expect(user_name.name).to eq('Not defined')
+        expect(user_name.players).to eq(['X', 'O'])
     end
     
-    describe 'Update user' do
-        it 'Can receive user input and change user name' do
-            $stdin = StringIO.new('Lee')
-            user_name = UserName.new
+    # describe 'Update user' do
+    #     it 'Can receive user input and change user name' do
+    #         $stdin = StringIO.new('Lee')
+    #         user_name = UserName.new
             
-            expect{user_name.change_user_name(user_name)}. to output("Name: \n").to_stdout.and change {user_name.name}.to('Lee')
-        end
-    end
+    #         expect{user_name.change_user_name(user_name)}. to output("Name: \n").to_stdout.and change {user_name.name}.to('Lee')
+    #     end
+    # end
 end
 
 describe Display do
@@ -50,8 +51,8 @@ describe TicTacToe do
         it 'Prompts the user to select their move' do
             tic_tac_toe = described_class.new
             user_name = UserName.new
-        
-            expect{tic_tac_toe.get_user_input(user_name)}.to output("#{user_name.name}: Make your move\n").to_stdout
+            $stdin = StringIO.new('Lee') #not sure why it works with this added. Get's stuck waiting for input if this isn't added but didn't need it before we changed it.
+            expect{tic_tac_toe.get_user_input(user_name)}.to output("#{user_name.current_player}: Make your move\n").to_stdout
         end
         it 'Returns user input' do
             tic_tac_toe = described_class.new
@@ -77,6 +78,67 @@ describe TicTacToe do
     
 
     
+
+end
+
+describe Game do
+    describe 'position_taken?' do
+        it 'returns false if board position is taken' do
+            game = described_class.new
+            display = Display.new
+            index = 3
+
+            expect(game.position_taken?(display, index)).to be false
+        end
+        it 'returns true if board position is free' do
+            game = described_class.new
+            display = Display.new
+
+            index = 3
+            display.score_board = [' ', ' ', ' ',
+            'X', ' ', ' ',
+            ' ', ' ', ' ']
+
+            expect(game.position_taken?(display, index)).to be true
+        end
+    end
+
+    describe 'valid_move?' do
+        it 'returns true if the input is within the length of the score_board array and space is available' do
+            game = described_class.new
+            display = Display.new
+            index = 3
+
+            expect(game.valid_move?(display, index)).to be true
+        end
+
+        it 'returns false if the input is not between 0-8 of the score_board array and space is not available' do
+            game = described_class.new
+            display = Display.new
+            index = 10
+
+            expect(game.valid_move?(display, index)).to be false
+        end
+
+    end
+
+    describe 'ai_move_selection' do
+        it 'can produce a random number between 0-8' do
+            game = described_class.new
+            display = Display.new
+
+            expect(game.ai_move_selection(display)).to be < 9
+            expect(game.ai_move_selection(display)).to be >= 0
+          
+        end
+        # it 'returns the move of the ai' do
+        #     game = described_class.new
+        #     display = Display.new
+        #     random_num = rand(8)
+
+        #     expect(game.ai_move_selection(display))
+        # end
+    end
 
 end
 
