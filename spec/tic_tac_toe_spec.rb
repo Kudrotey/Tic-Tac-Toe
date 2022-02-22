@@ -37,9 +37,18 @@ describe Display do
             end
         end
         describe 'update_score' do
-            it 'Updates the score array with chosen index' do
+            it 'Can apply score for human player' do
                 tic_tac_toe = described_class.new
-                expect(tic_tac_toe.update_score_board(0)). to eq(['X', ' ', ' ',
+                user_name = UserName.new
+                expect(tic_tac_toe.update_score_board(user_name, 0)). to eq(['X', ' ', ' ',
+                ' ', ' ', ' ',
+                ' ', ' ', ' '])
+            end
+            it 'Can apply score for AI player' do
+                tic_tac_toe = described_class.new
+                user_name = UserName.new
+                user_name.current_player = 'O'
+                expect(tic_tac_toe.update_score_board(user_name, 0)). to eq(['O', ' ', ' ',
                 ' ', ' ', ' ',
                 ' ', ' ', ' '])
             end

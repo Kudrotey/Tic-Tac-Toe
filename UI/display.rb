@@ -13,8 +13,8 @@ class Display
         puts " #{@score_board[6]} | #{@score_board[7]} | #{@score_board[8]} "
      end
 
-     def update_score_board (index)
-        @score_board[index] = 'X'
+     def update_score_board (user_name, index)
+        @score_board[index] = user_name.current_player
         @score_board
      end
 

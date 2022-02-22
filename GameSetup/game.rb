@@ -35,4 +35,10 @@ class Game
         random_num = rand(8)
         return random_num
     end
-end
+
+    # turn_count = 0
+    # if even, human's turn
+    # if od AI's turn
+    # turn_count
+    # needs access to players array and current_player (from user)
+end 
