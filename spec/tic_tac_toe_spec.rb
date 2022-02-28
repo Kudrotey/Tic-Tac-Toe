@@ -140,13 +140,13 @@ describe Game do
             expect(game.ai_move_selection(display)).to be >= 0
           
         end
-        it 'calls valid_move? method and returns a random number' do
-            game = described_class.new
-            display = Display.new
-            random_num = rand(8)
-            # Way of testing that valid_move? has been called
-            expect(game.ai_move_selection(display))
-        end
+        # it 'calls valid_move? method and returns a random number' do
+        #     game = described_class.new
+        #     display = Display.new
+        #     random_num = rand(8)
+        #     # Way of testing that valid_move? has been called
+        #     expect(game.ai_move_selection(display))
+        # end
     end
 
 end

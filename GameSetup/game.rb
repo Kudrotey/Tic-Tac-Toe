@@ -40,6 +40,10 @@ class Game
         end
     end
 
+    # ai_move_selection passing without else condition - need to try filling up the board to test if it being invoked again.
+
+    # May not need calls valid_move test, first test may be sufficient
+
     
 
     # turn_count = 0
