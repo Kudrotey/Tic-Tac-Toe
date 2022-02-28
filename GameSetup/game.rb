@@ -33,8 +33,14 @@ class Game
 
     def ai_move_selection(display)
         random_num = rand(8)
-        return random_num
+        if valid_move?(display, random_num)
+            return random_num
+        else
+            ai_move_selection(display)
+        end
     end
+
+    
 
     # turn_count = 0
     # if even, human's turn

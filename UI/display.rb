@@ -19,4 +19,7 @@ class Display
      end
 
     #  Maybe change update_score_board to make_move
+
+    # board = Display.new
+    # puts board.display_board
 end
