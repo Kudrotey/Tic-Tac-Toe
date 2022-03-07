@@ -145,19 +145,20 @@ describe Game do
         end
         it 'Returns random selection' do
             game = described_class.new
-            remaining_places = [0, 1, 2,
-                                3, 4]
+            remaining_places = [0, 1, 2, 3, 4]
             
             expect(game.ai_move_selection(remaining_places)).to be_between(0, 4)
-          
         end
-        # it 'calls valid_move? method and returns a random number' do
-        #     game = described_class.new
-        #     display = Display.new
-        #     random_num = rand(8)
-        #     # Way of testing that valid_move? has been called
-        #     expect(game.ai_move_selection(display))
-        # end
+      
+    end
+
+    describe 'update_remaining_places' do
+        it 'returns the updated remaining places array' do
+            game = described_class.new
+            remaining_places = [3,6,7,8]
+            selection = 6
+            expect(game.update_remaining_places(remaining_places,selection)).to eq([3,7,8])
+        end    
     end
 
 end

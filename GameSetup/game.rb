@@ -1,5 +1,6 @@
 require_relative '../UI/display.rb'
 require_relative '../GameSetup/user.rb'
+require_relative '../tic_tac_toe.rb'
 require 'pry'
 
 class Game
@@ -41,41 +42,20 @@ class Game
     def ai_move_selection(remaining_places)
         
         random_selection = remaining_places.sample
-        remaining_places.delete(random_selection)
+        
         return random_selection
-        # if valid_move?(display, random_num)
-        #     return random_num
-        # else
-        #     random_num += 1
-        #     valid_move?(display, random_num
-
-        #     # ai_move_selection(display)
-        # end
-
-        # while !valid_move?(display, random_num)
-        #     random_num = rand(8)
-        # end
-        # return random_num
 
     end
 
-    # ai_move_selection passing without else condition - need to try filling up the board to test if it being invoked again.
-
-    # May not need calls valid_move test, first test may be sufficient
+    def update_remaining_places (remaining_places, random_selection)
+        remaining_places.delete(random_selection)
+        return remaining_places
+    end
 
     
 
-    # turn_count = 0
-    # if even, human's turn
-    # if od AI's turn
-    # turn_count
-    # needs access to players array and current_player (from user)
 end 
 
-# game = Game.new
 
-# display = ['X', ' ', ' ',
-# ' ', ' ', ' ',
-# ' ', ' ', ' ']
 
-# puts game.ai_move_selection(display)
+
