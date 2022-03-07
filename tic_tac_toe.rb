@@ -1,6 +1,6 @@
-require './UI/display.rb'
+require_relative './UI/display.rb'
 require './GameSetup/user.rb'
-require './GameSetup/game.rb'
+require_relative './GameSetup/game.rb'
 
 class TicTacToe 
 
@@ -15,31 +15,18 @@ class TicTacToe
         user_input.to_i - 1
      end
 
-     end
+end
 
-#   Game script
-#   game = TicTacToe.new
-#   display = Display.new
-#   user = UserName.new
-#   user.change_user_name(user)
-#   puts display.display_board
-#   user_input = game.get_user_input(user)
-#   index = game.input_to_index(user_input)
-#   display.update_score_board(index)
-#   puts display.display_board
+# user = UserName.new
+# tic_tac_toe = TicTacToe.new
+# tic_tac_toe.get_user_input(user)
+display = Display.new
+display.test_method
+# game = Game.new
 
-# [
-#     ['', '', ''],
-#     ['', '', ''],
-#     ['', '', '']
-#     ];
-
-# tictactoe = TicTacToe.new
-# display = Display.new
-# game = GameSetup.new
-# user = GameSetup.new
 
 # remaining_places = game.remaining_places
+# puts remaining_places
 
 # # In TicTacToe
 # display.display_board
