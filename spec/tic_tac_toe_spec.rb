@@ -95,20 +95,19 @@ describe Game do
         it 'returns false if board position is taken' do
             game = described_class.new
             display = Display.new
+            score_board = display.score_board
             index = 3
 
-            expect(game.position_taken?(display, index)).to be false
+            expect(game.position_taken?(score_board, index)).to be false
         end
         it 'returns true if board position is free' do
             game = described_class.new
-            display = Display.new
-
             index = 3
-            display.score_board = [' ', ' ', ' ',
+            score_board = [' ', ' ', ' ',
             'X', ' ', ' ',
             ' ', ' ', ' ']
 
-            expect(game.position_taken?(display, index)).to be true
+            expect(game.position_taken?(score_board, index)).to be true
         end
     end
 
@@ -116,17 +115,19 @@ describe Game do
         it 'returns true if the input is within the length of the score_board array and space is available' do
             game = described_class.new
             display = Display.new
+            score_board = display.score_board
             index = 3
 
-            expect(game.valid_move?(display, index)).to be true
+            expect(game.valid_move?(score_board, index)).to be true
         end
 
         it 'returns false if the input is not between 0-8 of the score_board array and space is not available' do
             game = described_class.new
             display = Display.new
+            score_board = display.score_board
             index = 10
 
-            expect(game.valid_move?(display, index)).to be false
+            expect(game.valid_move?(score_board, index)).to be false
         end
 
     end
@@ -134,10 +135,20 @@ describe Game do
     describe 'ai_move_selection' do
         it 'can produce a random number between 0-8' do
             game = described_class.new
-            display = Display.new
 
-            expect(game.ai_move_selection(display)).to be < 9
-            expect(game.ai_move_selection(display)).to be >= 0
+            remaining_places = [0, 1, 2,
+                                3, 4, 5,
+                                6, 7, 8]
+
+            expect(game.ai_move_selection(remaining_places)).to be_between(0, 8)
+          
+        end
+        it 'Returns random selection' do
+            game = described_class.new
+            remaining_places = [0, 1, 2,
+                                3, 4]
+            
+            expect(game.ai_move_selection(remaining_places)).to be_between(0, 4)
           
         end
         # it 'calls valid_move? method and returns a random number' do

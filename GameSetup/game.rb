@@ -4,6 +4,13 @@ require 'pry'
 
 class Game
 
+    attr_accessor :remaining_places
+    def initialize
+        @remaining_places = [0, 1, 2,
+        3, 4, 5,
+        6, 7, 8]
+    end
+
     WINNING_COMBINATIONS = [
         [0, 1, 2], 
         [3, 4, 5], 
@@ -15,29 +22,41 @@ class Game
         [0, 4, 8]
     ]
 
-    def position_taken?(display, chosen_index)
-        if display.score_board[chosen_index] == 'X' || display.score_board[chosen_index] == 'O'
+    def position_taken?(score_board, chosen_index)
+        if score_board[chosen_index] == 'X' || score_board[chosen_index] == 'O'
             return true
         else
             return false
         end
     end
 
-    def valid_move?(display, chosen_index)
-        if chosen_index.between?(0,8) && !position_taken?(display, chosen_index)
+    def valid_move?(score_board, chosen_index)
+        if chosen_index.between?(0,8) && !position_taken?(score_board, chosen_index)
             return true
         else
             return false
         end
     end
 
-    def ai_move_selection(display)
-        random_num = rand(8)
-        if valid_move?(display, random_num)
-            return random_num
-        else
-            ai_move_selection(display)
-        end
+    def ai_move_selection(remaining_places)
+        
+        random_selection = remaining_places.sample
+        remaining_places.delete(random_selection)
+        return random_selection
+        # if valid_move?(display, random_num)
+        #     return random_num
+        # else
+        #     random_num += 1
+        #     valid_move?(display, random_num
+
+        #     # ai_move_selection(display)
+        # end
+
+        # while !valid_move?(display, random_num)
+        #     random_num = rand(8)
+        # end
+        # return random_num
+
     end
 
     # ai_move_selection passing without else condition - need to try filling up the board to test if it being invoked again.
@@ -52,3 +71,11 @@ class Game
     # turn_count
     # needs access to players array and current_player (from user)
 end 
+
+# game = Game.new
+
+# display = ['X', ' ', ' ',
+# ' ', ' ', ' ',
+# ' ', ' ', ' ']
+
+# puts game.ai_move_selection(display)
