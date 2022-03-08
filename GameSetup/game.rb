@@ -1,6 +1,6 @@
 require_relative '../UI/display.rb'
 require_relative '../GameSetup/user.rb'
-require_relative '../tic_tac_toe.rb'
+# require_relative '../tic_tac_toe.rb'
 require 'pry'
 
 class Game
@@ -12,19 +12,43 @@ class Game
         6, 7, 8]
     end
 
-    WINNING_COMBINATIONS = [
-        [0, 1, 2], 
-        [3, 4, 5], 
-        [6, 7, 8], 
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [6, 4, 2],
-        [0, 4, 8]
-    ]
+    def check_winner?(score_board, current_player)
+        if score_board[0] == current_player && score_board[1] == current_player && score_board[2] == current_player
+            return true
+        elsif score_board[3] == current_player && score_board[4] == current_player && score_board[5] == current_player
+            return true
+        elsif score_board[6] == current_player && score_board[7] == current_player && score_board[8] == current_player
+            return true
+        elsif score_board[0] == current_player && score_board[3] == current_player && score_board[6] == current_player
+            return true
+        elsif score_board[1] == current_player && score_board[4] == current_player && score_board[7] == current_player
+            return true
+        elsif score_board[2] == current_player && score_board[5] == current_player && score_board[8] == current_player
+            return true
+        elsif score_board[6] == current_player && score_board[4] == current_player && score_board[2] == current_player
+            return true
+        elsif score_board[0] == current_player && score_board[4] == current_player && score_board[8] == current_player
+            return true
+        else
+            return false
+        end
+    end
+
+
+    # WINNING_COMBINATIONS = [
+    #     [0, 1, 2], 
+    #     [3, 4, 5], 
+    #     [6, 7, 8], 
+    #     [0, 3, 6],
+    #     [1, 4, 7],
+    #     [2, 5, 8],
+    #     [6, 4, 2],
+    #     [0, 4, 8]
+    # ]
 
     def position_taken?(score_board, chosen_index)
         if score_board[chosen_index] == 'X' || score_board[chosen_index] == 'O'
+            puts 'This position has been taken. Choose again'
             return true
         else
             return false

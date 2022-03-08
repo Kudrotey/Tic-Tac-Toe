@@ -9,15 +9,6 @@ describe UserName do
         user_name = described_class.new
         expect(user_name.players).to eq(['X', 'O'])
     end
-    
-    # describe 'Update user' do
-    #     it 'Can receive user input and change user name' do
-    #         $stdin = StringIO.new('Lee')
-    #         user_name = UserName.new
-            
-    #         expect{user_name.change_user_name(user_name)}. to output("Name: \n").to_stdout.and change {user_name.name}.to('Lee')
-    #     end
-    # end
 end
 
 describe Display do
@@ -27,32 +18,35 @@ describe Display do
             score_board = tic_tac_toe.score_board
             expect{tic_tac_toe.display_board}.to output(" #{score_board[0]} " "|" " #{score_board[1]} " "|" " #{score_board[2]} \n" "-----------\n" " #{score_board[3]} " "|" " #{score_board[4]} " "|" " #{score_board[5]} \n" "-----------\n" " #{score_board[6]} " "|" " #{score_board[7]} " "|" " #{score_board[8]} \n").to_stdout
         end
-        describe 'score_board' do 
-            it 'Can return an array with 9 empty strings' do
-                tic_tac_toe = described_class.new
+    end
+
+    describe 'score_board' do 
+        it 'Can return an array with 9 empty strings' do
+            tic_tac_toe = described_class.new
             
-                expect(tic_tac_toe.score_board).to eq ([' ', ' ', ' ',
-            ' ', ' ', ' ',
-            ' ', ' ', ' '])
-            end
+            expect(tic_tac_toe.score_board).to eq ([' ', ' ', ' ',
+                                                    ' ', ' ', ' ',
+                                                  ' ', ' ', ' '])
         end
-        describe 'update_score' do
-            it 'Can apply score for human player' do
-                tic_tac_toe = described_class.new
-                user_name = UserName.new
-                expect(tic_tac_toe.update_score_board(user_name, 0)). to eq(['X', ' ', ' ',
-                ' ', ' ', ' ',
-                ' ', ' ', ' '])
-            end
-            it 'Can apply score for AI player' do
-                tic_tac_toe = described_class.new
-                user_name = UserName.new
-                user_name.current_player = 'O'
-                expect(tic_tac_toe.update_score_board(user_name, 0)). to eq(['O', ' ', ' ',
-                ' ', ' ', ' ',
-                ' ', ' ', ' '])
-            end
+    end
+
+    describe 'update_score' do
+        it 'Can apply score for human player' do
+            tic_tac_toe = described_class.new
+            user_name = UserName.new
+            expect(tic_tac_toe.update_score_board(user_name, 0)). to eq(['X', ' ', ' ',
+                                                                         ' ', ' ', ' ',
+                                                                         ' ', ' ', ' '])
         end
+        it 'Can apply score for AI player' do
+            tic_tac_toe = described_class.new
+            user_name = UserName.new
+            user_name.current_player = 'O'
+            expect(tic_tac_toe.update_score_board(user_name, 0)). to eq(['O', ' ', ' ',
+                                                                         ' ', ' ', ' ',
+                                                                         ' ', ' ', ' '])
+        end
+    end
 end
 
 describe TicTacToe do
@@ -70,24 +64,25 @@ describe TicTacToe do
 
             expect(tic_tac_toe.get_user_input(user_name)).to eq ('1')
         end
+        it 'Outputs message to terminal if position has been taken' do
+            tic_tac_toe = described_class.new
+            user = UserName.new
+            game = Game.new
+            remaining_places = [1, 2, 3]
+            user_input = 1
+            expect(tic_tac_toe.get_user_input(user, remaining_places))
+
+        end
     end    
 
         
-    describe 'input_to_index' do
-        it 'converts user input string to integer' do
-                tic_tac_toe = described_class.new
-                # $stdin = StringIO.new('1')
-                expect(tic_tac_toe.input_to_index('1')). to eq(0)
-        end
-        
-    end
-    
-    
-    end
-    
-
-    
-
+    # describe 'input_to_index' do
+    #     it 'converts user input string to integer' do
+    #         tic_tac_toe = described_class.new
+    #             # $stdin = StringIO.new('1')
+    #         expect(tic_tac_toe.input_to_index('1')). to eq(0)
+    #     end
+    # end
 end
 
 describe Game do
@@ -104,8 +99,8 @@ describe Game do
             game = described_class.new
             index = 3
             score_board = [' ', ' ', ' ',
-            'X', ' ', ' ',
-            ' ', ' ', ' ']
+                           'X', ' ', ' ',
+                           ' ', ' ', ' ']
 
             expect(game.position_taken?(score_board, index)).to be true
         end
@@ -161,29 +156,98 @@ describe Game do
         end    
     end
 
+    describe 'check_winner' do
+        it 'Returns false if no winning combination' do 
+            game = described_class.new
+            score_board =   ['X', ' ', 'X',
+                            ' ', ' ', ' ',
+                            ' ', ' ', ' ']
+            current_player = 'X'
+
+            expect(game.check_winner?(score_board, current_player)).to be false
+        end
+
+        it 'Returns true for winning combination on the top line' do
+            game = described_class.new
+            score_board =   ['X', 'X', 'X',
+            ' ', ' ', ' ',
+            ' ', ' ', ' ']
+            current_player = 'X'
+            
+            expect(game.check_winner?(score_board, current_player)).to be true
+        end
+
+        it 'Returns true for winning combination on the top line' do
+            game = described_class.new
+            score_board =   [' ', ' ', ' ',
+            'X', 'X', 'X',
+            ' ', ' ', ' ']
+            current_player = 'X'
+            
+            expect(game.check_winner?(score_board, current_player)).to be true
+        end
+
+        it 'Returns true for winning combination on the top line' do
+            game = described_class.new
+            score_board =   [' ', ' ', ' ',
+            ' ', ' ', ' ',
+            'X', 'X', 'X']
+            current_player = 'X'
+            
+            expect(game.check_winner?(score_board, current_player)).to be true
+        end
+        
+        it 'Returns true for winning combination on the top line' do
+            game = described_class.new
+            score_board =   ['X', ' ', ' ',
+            'X', ' ', ' ',
+            'X', ' ', ' ']
+            current_player = 'X'
+            
+            expect(game.check_winner?(score_board, current_player)).to be true
+        end
+
+        it 'Returns true for winning combination on the top line' do
+            game = described_class.new
+            score_board =   [' ', 'X', ' ',
+            ' ', 'X', ' ',
+            ' ', 'X', ' ']
+            current_player = 'X'
+            
+            expect(game.check_winner?(score_board, current_player)).to be true
+        end
+
+        it 'Returns true for winning combination on the top line' do
+            game = described_class.new
+            score_board =   [' ', ' ', 'X',
+            ' ', ' ', 'X',
+            ' ', ' ', 'X']
+            current_player = 'X'
+            
+            expect(game.check_winner?(score_board, current_player)).to be true
+        end
+
+        it 'Returns true for winning combination on the top line' do
+            game = described_class.new
+            score_board =   ['X', ' ', ' ',
+            ' ', 'X', ' ',
+            ' ', ' ', 'X']
+            current_player = 'X'
+            
+            expect(game.check_winner?(score_board, current_player)).to be true
+        end
+
+        it 'Returns true for winning combination on the top line' do
+            game = described_class.new
+            score_board =   [' ', ' ', 'X',
+            ' ', 'X', ' ',
+            'X', ' ', ' ']
+            current_player = 'X'
+            
+            expect(game.check_winner?(score_board, current_player)).to be true
+        end
+    end
+
 end
 
-        # it 'Updates score board with user input' do
-        #     tic_tac_toe = described_class.new
-        #     user_name = UserName.new
-        #     $stdin = StringIO.new('1')
-
-        #     expect{}. to output("#{user_name.name}: Make your move\n").to_stdout.and change {user_name.name}.to('Lee')
-        # end
-
-
-
-  # Can return an array of 9 empty strings
-  # Can display empty grid to the terminal
-
-  # Can take user input an populate one string in the array
-  # Display updated grid with player 1's input
-
-  # describe 'update_score' do 
-        #     # it 'Updates score board array with user input' do
-        #     #     tic_tac_toe = described_class.new
-        #     #     user_name = UserName.new
-        #     #     $stdin = StringIO.new('1')
-        #     #     expect(tic_tac_toe.score_board[0]). to eq('X')
-        #     # end
-        # end
+        
