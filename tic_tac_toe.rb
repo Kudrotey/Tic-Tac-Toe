@@ -10,24 +10,28 @@ class TicTacToe
    game = Game.new
    current_player = user.current_player
    score_board = display.score_board
+   game_running = true
    
    # Human player first move. Displays the board, takes and adds selection and removes from remaining places array
    # Need to add error handling for invalid move for human player
    
+   remaining_places = game.remaining_places
    
    display.display_board
-   while !game.check_winner?(score_board, current_player) do
+   while game_running do
+      
       
       # First Round
       user.current_player = user.players[0]
-      remaining_places = game.remaining_places
       user_input = game.get_user_input(user, remaining_places)
    
       display.update_score_board(user, user_input)
       display.display_board
       game.update_remaining_places(remaining_places, user_input)
-
-      break if game.check_winner?(score_board, current_player)
+      if game.check_winner?(score_board, current_player)
+         game_running = false
+         break
+      end
         
       #AI player move
       user.current_player = user.players[1]
@@ -36,12 +40,12 @@ class TicTacToe
       display.display_board
       game.update_remaining_places(remaining_places, random_selection)
    end
+   puts "#{user.current_player} wins!"
 
-   if game.remaining_places.length == 0
-      puts "It's a draw!"
-   else
-      puts "#{user.current_player} wins!"
-   end
+   # if game.remaining_places.length == 0
+   #    puts "It's a draw!"
+   # else
+   # end
 end
 
 
