@@ -50,30 +50,7 @@ describe Display do
 end
 
 describe TicTacToe do
-    describe 'get_user_input' do 
-        it 'Prompts the user to select their move' do
-            tic_tac_toe = described_class.new
-            user_name = UserName.new
-            $stdin = StringIO.new('Lee') #not sure why it works with this added. Get's stuck waiting for input if this isn't added but didn't need it before we changed it.
-            expect{tic_tac_toe.get_user_input(user_name)}.to output("#{user_name.current_player}: Make your move\n").to_stdout
-        end
-        it 'Returns user input' do
-            tic_tac_toe = described_class.new
-            user_name = UserName.new
-            $stdin = StringIO.new('1')
-
-            expect(tic_tac_toe.get_user_input(user_name)).to eq ('1')
-        end
-        it 'Outputs message to terminal if position has been taken' do
-            tic_tac_toe = described_class.new
-            user = UserName.new
-            game = Game.new
-            remaining_places = [1, 2, 3]
-            user_input = 1
-            expect(tic_tac_toe.get_user_input(user, remaining_places))
-
-        end
-    end    
+    
 
         
     # describe 'input_to_index' do
@@ -86,43 +63,69 @@ describe TicTacToe do
 end
 
 describe Game do
-    describe 'position_taken?' do
+    describe 'position_available?' do
         it 'returns false if board position is taken' do
             game = described_class.new
-            display = Display.new
-            score_board = display.score_board
+            # display = Display.new
+            # score_board = display.score_board
             index = 3
+            remaining_places = [0, 1, 2, 4, 5, 6, 7, 8]
 
-            expect(game.position_taken?(score_board, index)).to be false
+            expect(game.position_available?(remaining_places, index)).to be false
         end
         it 'returns true if board position is free' do
             game = described_class.new
             index = 3
-            score_board = [' ', ' ', ' ',
-                           'X', ' ', ' ',
-                           ' ', ' ', ' ']
+            remaining_places = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 
-            expect(game.position_taken?(score_board, index)).to be true
+            expect(game.position_available?(remaining_places, index)).to be true
         end
     end
+
+    describe 'get_user_input' do 
+        it 'Prompts the user to select their move' do
+            game = described_class.new
+            user_name = UserName.new
+            remaining_places = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+            $stdin = StringIO.new('Lee') #not sure why it works with this added. Get's stuck waiting for input if this isn't added but didn't need it before we changed it.
+            expect{game.get_user_input(user_name, remaining_places)}.to output("#{user_name.current_player}: Make your move\n").to_stdout
+        end
+        it 'Returns user input' do
+            game = described_class.new
+            user_name = UserName.new
+            $stdin = StringIO.new('1')
+            remaining_places = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
+            expect(game.get_user_input(user_name, remaining_places)).to eq (0)
+        end
+        # it 'Outputs message to terminal if position has been taken' do
+        #     game = described_class.new
+        #     user = UserName.new
+        #     game = Game.new
+        #     remaining_places = [2, 3, 4]
+        #     user_input = 1
+        #     expect{tic_tac_toe.get_user_input(user, remaining_places)}.to output('That position has already been taken. Choose Again').to_stdout
+
+        # end
+    end    
 
     describe 'valid_move?' do
         it 'returns true if the input is within the length of the score_board array and space is available' do
             game = described_class.new
             display = Display.new
-            score_board = display.score_board
+            remaining_places = [0, 1, 2, 3, 4, 5, 6, 7, 8]
             index = 3
 
-            expect(game.valid_move?(score_board, index)).to be true
+            expect(game.valid_move?(remaining_places, index)).to be true
         end
 
         it 'returns false if the input is not between 0-8 of the score_board array and space is not available' do
             game = described_class.new
             display = Display.new
-            score_board = display.score_board
+            remaining_places = [0, 1, 2, 3, 4, 5, 6, 7, 8]
             index = 10
 
-            expect(game.valid_move?(score_board, index)).to be false
+            expect(game.valid_move?(remaining_places, index)).to be false
         end
 
     end
