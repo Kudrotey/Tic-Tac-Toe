@@ -10,45 +10,42 @@ class TicTacToe
    game = Game.new
    current_player = user.current_player
    score_board = display.score_board
-   game_running = true
-   
-   # Human player first move. Displays the board, takes and adds selection and removes from remaining places array
-   # Need to add error handling for invalid move for human player
-   
    remaining_places = game.remaining_places
-   
+
    display.display_board
-   while game_running do
+
+   while remaining_places.length > 0 do
+      if !game.check_winner?(score_board, user.players[1])
+         # Human player move (X)
+         user.current_player = user.players[0]
+         user_input = game.get_user_input(user, remaining_places)
+         display.update_score_board(user, user_input)
+         display.display_board
+         game.update_remaining_places(remaining_places, user_input)
+      else
+         puts "#{user.players[1]} wins!"
+         break
+      end
       
-      
-      # First Round
-      user.current_player = user.players[0]
-      user_input = game.get_user_input(user, remaining_places)
-   
-      display.update_score_board(user, user_input)
-      display.display_board
-      game.update_remaining_places(remaining_places, user_input)
-      if game.check_winner?(score_board, current_player)
-         game_running = false
+      if game.remaining_places.length == 0 && !game.check_winner?(score_board, user.current_player)
+         puts "It's a draw!"
          break
       end
         
-      #AI player move
-      user.current_player = user.players[1]
-      random_selection = game.ai_move_selection(game.remaining_places)
-      display.update_score_board(user, random_selection)
-      display.display_board
-      game.update_remaining_places(remaining_places, random_selection)
+      if !game.check_winner?(score_board, user.players[0])
+         # AI player move (O)
+         puts "#{user.players[1]}: Make your move"
+         user.current_player = user.players[1]
+         random_selection = game.ai_move_selection(game.remaining_places)
+         display.update_score_board(user, random_selection)
+         display.display_board
+         game.update_remaining_places(remaining_places, random_selection)
+      else
+         puts "#{user.players[0]} wins!"
+         break
+      end
    end
-   puts "#{user.current_player} wins!"
-
-   # if game.remaining_places.length == 0
-   #    puts "It's a draw!"
-   # else
-   # end
 end
-
-
 
 
 
