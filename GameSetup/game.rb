@@ -1,6 +1,5 @@
 require_relative '../UI/display.rb'
 require_relative '../GameSetup/user.rb'
-# require_relative '../tic_tac_toe.rb'
 require 'pry'
 
 class Game

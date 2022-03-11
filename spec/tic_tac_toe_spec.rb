@@ -1,4 +1,4 @@
-require_relative '../tic_tac_toe.rb'
+# require_relative '../tic_tac_toe.rb'
 require_relative '../GameSetup/user.rb'
 require_relative '../GameSetup/game.rb'
 require_relative '../UI/display.rb'
@@ -14,17 +14,17 @@ end
 describe Display do
     describe 'display_board' do
         it 'Can display a 3 x 3 grid in the terminal' do
-            tic_tac_toe = described_class.new
-            score_board = tic_tac_toe.score_board
-            expect{tic_tac_toe.display_board}.to output(" #{score_board[0]} " "|" " #{score_board[1]} " "|" " #{score_board[2]} \n" "-----------\n" " #{score_board[3]} " "|" " #{score_board[4]} " "|" " #{score_board[5]} \n" "-----------\n" " #{score_board[6]} " "|" " #{score_board[7]} " "|" " #{score_board[8]} \n").to_stdout
+            display = described_class.new
+            score_board = display.score_board
+            expect{display.display_board}.to output("\n #{score_board[0]} " "|" " #{score_board[1]} " "|" " #{score_board[2]} \n" "-----------\n" " #{score_board[3]} " "|" " #{score_board[4]} " "|" " #{score_board[5]} \n" "-----------\n" " #{score_board[6]} " "|" " #{score_board[7]} " "|" " #{score_board[8]} \n\n").to_stdout
         end
     end
 
     describe 'score_board' do 
         it 'Can return an array with 9 empty strings' do
-            tic_tac_toe = described_class.new
+            display = described_class.new
             
-            expect(tic_tac_toe.score_board).to eq ([' ', ' ', ' ',
+            expect(display.score_board).to eq ([' ', ' ', ' ',
                                                     ' ', ' ', ' ',
                                                   ' ', ' ', ' '])
         end
@@ -32,35 +32,24 @@ describe Display do
 
     describe 'update_score' do
         it 'Can apply score for human player' do
-            tic_tac_toe = described_class.new
+            display = described_class.new
             user_name = UserName.new
-            expect(tic_tac_toe.update_score_board(user_name, 0)). to eq(['X', ' ', ' ',
+            expect(display.update_score_board(user_name, 0)). to eq(['X', ' ', ' ',
                                                                          ' ', ' ', ' ',
                                                                          ' ', ' ', ' '])
         end
         it 'Can apply score for AI player' do
-            tic_tac_toe = described_class.new
+            display = described_class.new
             user_name = UserName.new
             user_name.current_player = 'O'
-            expect(tic_tac_toe.update_score_board(user_name, 0)). to eq(['O', ' ', ' ',
+            expect(display.update_score_board(user_name, 0)). to eq(['O', ' ', ' ',
                                                                          ' ', ' ', ' ',
                                                                          ' ', ' ', ' '])
         end
     end
 end
 
-describe TicTacToe do
-    
 
-        
-    # describe 'input_to_index' do
-    #     it 'converts user input string to integer' do
-    #         tic_tac_toe = described_class.new
-    #             # $stdin = StringIO.new('1')
-    #         expect(tic_tac_toe.input_to_index('1')). to eq(0)
-    #     end
-    # end
-end
 
 describe Game do
     describe 'position_available?' do
@@ -87,26 +76,12 @@ describe Game do
             game = described_class.new
             user_name = UserName.new
             remaining_places = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-            $stdin = StringIO.new('Lee') #not sure why it works with this added. Get's stuck waiting for input if this isn't added but didn't need it before we changed it.
+            # $stdin = StringIO.new('2') 
+            allow(game).to receive(:gets).and_return('2')
+    
             expect{game.get_user_input(user_name, remaining_places)}.to output("#{user_name.current_player}: Make your move\n").to_stdout
         end
-        it 'Returns user input' do
-            game = described_class.new
-            user_name = UserName.new
-            $stdin = StringIO.new('1')
-            remaining_places = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-
-            expect(game.get_user_input(user_name, remaining_places)).to eq (0)
-        end
-        # it 'Outputs message to terminal if position has been taken' do
-        #     game = described_class.new
-        #     user = UserName.new
-        #     game = Game.new
-        #     remaining_places = [2, 3, 4]
-        #     user_input = 1
-        #     expect{tic_tac_toe.get_user_input(user, remaining_places)}.to output('That position has already been taken. Choose Again').to_stdout
-
-        # end
+      
     end    
 
     describe 'valid_move?' do
